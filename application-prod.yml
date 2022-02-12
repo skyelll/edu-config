@@ -1,0 +1,102 @@
+spring:
+  redis:
+    host: 172.16.16.17
+    port: 6379
+    password: '{cipher}AQBfff0A3wlZn/HkNkUA/pOzGw0MdC8c5wHkIYzTO0ljX4wM1NWSvzJMpcKwh6XBZSWQHt1IRoXJ1ANVgBE59DNXhUhHhoiSVkVuJ1X4Da4IAhrSp3RuaERSMGsAbotcvNrJDInm0I561GDTM0jvQ/1V1icnbX2AFSNHddctV2Xet4TOQaYRh++dWhpwkVEnucej1J3K8onwfoMLIv1EiIqwgbCmeBAAh6K0pyxvWa25WSmtxOcxjw8HPANJieXCDGZBHM6o1zz/7YV3irjN2DJAAKAPrqKhKFFE56x97QqIjP8Ajl8ay85ZVRFRcrstIVVC7Yoz9mhZOX4ayZ6fwQDs7VYyX+BaqQXmiiBzByxxrPCEAf5wbkyV9NFd83xetVE='
+    database: 8
+    pool:
+      max-active: 20  # 连接池最大连接数（使用负值表示没有限制）
+      max-wait: -1  # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      max-idle: 8 # 连接池中的最大空闲连接
+      min-idle: 0 # 连接池中的最小空闲连接
+#    sentinel:
+#      master: mymaster
+#      nodes: node1.td-k8s.com:24379
+
+db:
+  ds:
+    write:
+      common: #通用写
+        url: jdbc:mysql://172.16.16.15:3306/cd-system?useUnicode=true&characterEncoding=UTF-8
+        username: cdmall
+        password: '{cipher}AQCEQGi7qEx9PH4A6Sx+/LCCmG9G9co7t6cB+nIARk1qrYWmw1ubR78hA+0paWO6WTh2vaL+IU7sgRxUSgOujzC4tMP8Xe+jhzwIxsKVIBlCQwL/UHrRJ08RYrduni6S9bXsJJU5uzAyADNxaCJWMgUK96MDhHZBo5WCOjOwD4BOnklCt4WAHBwnwVruUBP3Ci7lNe+rp+bsZ+Mnx+hh+qfRy/g835y7m4LN0IHZ/Znoq/jIDqIUXD8SIBDb3DwCraI77SLvoPB5J4fDj7NgyApJXC/zrZc/NKXC+sK1jQwItP0WwtX6JPGujOM41pWbd5+Ul7VT/ukx7tXNjr13Z9a0Uwy/PHQLdBHgdQpr5nAXmtrEyLwJEEv86cmrle3ReAU='
+    read:
+      common: #通用读
+        url: jdbc:mysql://172.16.16.19:3306/cd-system?useUnicode=true&characterEncoding=UTF-8
+        username: cdmall
+        password: '{cipher}AQCEQGi7qEx9PH4A6Sx+/LCCmG9G9co7t6cB+nIARk1qrYWmw1ubR78hA+0paWO6WTh2vaL+IU7sgRxUSgOujzC4tMP8Xe+jhzwIxsKVIBlCQwL/UHrRJ08RYrduni6S9bXsJJU5uzAyADNxaCJWMgUK96MDhHZBo5WCOjOwD4BOnklCt4WAHBwnwVruUBP3Ci7lNe+rp+bsZ+Mnx+hh+qfRy/g835y7m4LN0IHZ/Znoq/jIDqIUXD8SIBDb3DwCraI77SLvoPB5J4fDj7NgyApJXC/zrZc/NKXC+sK1jQwItP0WwtX6JPGujOM41pWbd5+Ul7VT/ukx7tXNjr13Z9a0Uwy/PHQLdBHgdQpr5nAXmtrEyLwJEEv86cmrle3ReAU='
+
+app:
+  #是否为web站点, 默认false
+  web.project: false
+  performance.log: NOTSET
+  performance.log.ignore:
+    # 不打印sql日志
+    sql: true
+    # 不打印mq日志
+    mq: true
+  okhttp:
+    read.timeout: 3000
+    connect.timeout: 3000
+    write.timeout: 10000
+    #最大空闲连接数
+    max.idle: 5
+    #空闲连接存活时间
+    alive.duration: 300
+logging:
+  level:
+    root: INFO
+    com.juzhi.cd: INFO 
+ribbon:
+    # 默认的连接超时时间, Feign会优先读取这个配置
+    ConnectTimeout: 2000
+    # 默认的读取超时时间, Feign会优先读取这个配置
+    ReadTimeout: 5000
+hystrix:
+    # hystrix执行命令的默认超时时间, 超过这个时间feign调用将抛出HystrixRuntimeException
+    command.default.execution.isolation.thread.timeoutInMilliseconds: 10000
+    # 线程池大小, Feign每个类使用不同的线程池
+    threadpool.default.coreSize: 100
+    
+qiniu:
+    access:
+        key: qSmIJEbNr_YrmuVu7tbabQ1ktbspOYOR2rqnd97f
+    secret:
+        key: IvKTQPTSsBJiscdR5SJQTMMS6uOxvxwtXg77rkRJ
+    bucket:
+        name: cdprod
+        domain: https://qiniu.icaodong.com
+    token:
+        expires: 3600
+
+minapp:
+  shop:
+    appid: wx88d4bf99ce09e060
+    appsecret: 69bea047cbc7d49fce3280f9037119b8
+    name: 草动消费端
+    version: 1.1.24
+    versiondesc: 草动消费端
+    templateid: 45
+    address: pages/index/index
+    tag: 商城
+    firstclass: 工具
+    secondclass: 办公
+    thirdclass:
+    firstid: 287
+    secondid: 298
+    thirdid:
+    title: 首页
+    whitelist: wx80de0e4d0fde04b3, wx5abce7440ec26fa8, wx25c15e3d8ff82a7f, wx226baab87d94553d, wxbdac592c53628387, wxafaaaa1002a56f89, wx1f035e106d0959cd, wx88d4bf99ce09e060, wx879f38a9e13bd510
+    requestdomain: https://api.icaodong.com,https://apiuat.icaodong.com
+    wsrequestdomain:
+    uploaddomain: https://up.qbox.me
+    downloaddomain: https://qiniu.icaodong.com,https://api.icaodong.com
+    webviewdomain: https://api.icaodong.com,https://apiuat.icaodong.com
+    proddomain:
+      webviewdomain: https://api.icaodong.com/miniapp
+      uploaddomain: https://up.qbox.me
+
+wx:
+  pay:
+    authorize:
+      url: https://api.icaodong.com	  
