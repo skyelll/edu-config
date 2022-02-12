@@ -1,6 +1,6 @@
 spring:
   redis:
-    host: 134.175.210.250
+    host: 134.175.210.253
     port: 65379
     password: 'cdMall@321'
     database: 0
